@@ -35,7 +35,7 @@ require('../src/App.php');
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <button type="submit" class="button is-link">IMPORT</button>
+              <button type="submit" id="btn-import" class="button is-link is-small">START IMPORT</button>
             </div>
           </div>
         </form>
@@ -111,6 +111,9 @@ require('../src/App.php');
     // Cree un varialle pour ler fom
     var form = $('form')[0];
 
+    //set button loading
+    $('#btn-import').text('PLEASE WAIT...')
+
     // Ajoutez l'Object FormData pour retenir les donnes du formularie
     var data = new FormData(form);
 
@@ -127,10 +130,10 @@ require('../src/App.php');
       success: function(data) {
 
         stats();
-
+        $('#btn-import').text('IMPORT AGAIN')
       },
       error: function(e) {
-
+        $('#btn-import').text('IMPORT AGAIN')
       }
     });
 
