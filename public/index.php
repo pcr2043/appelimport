@@ -88,7 +88,7 @@ require('../src/App.php');
         // create a tempalte
         let template = $('<a class="list-item"></a>');
         // set text to the template
-        template.text('Abonné :' + call.numero_abonnement + ' --  volumne: ' + call.duration);
+        template.text('Abonné :' + call.numero_abonnement + ' --  volume appels: ' + call.duration);
         // append element
         callsListUI.append(template)
 
