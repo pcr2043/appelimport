@@ -1,0 +1,16 @@
+{
+    "name": "patrick/appels-import",
+    "description": "imports calls into database",
+    "authors": [{
+        "name": "pcr2043",
+        "email": "pcr2043@gmail.com"
+    }],
+    "require": {
+        "illuminate/database": "^5.8"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
