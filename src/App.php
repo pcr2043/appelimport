@@ -16,26 +16,27 @@ if (isset($_FILES['log'])) {
   $contacts = Contact::parseCSV($csvFile);
 
   // split contacts into blocks of 1000 records to not charge to much memory
-  // $contactBlocks = array_chunk($contacts, ceil(count($contacts) / 1000));
+  $contactBlocks = array_chunk($contacts, ceil(count($contacts) / 10000));
 
-  foreach ($contacts as $dataContact) {
+  foreach ($contactBlocks as $contactBlock) {
 
     try {
       // tried bulk insertt but didint work, need more time to check taht
-      // if ($blockofContacts != null)
-      //   Contact::insert($blockofContacts);
+      if (count($contactBlock) > 0)
+        Contact::insert($contactBlock);
 
       //so let insert one at time
-      if (is_array($dataContact)) {
-        $contact = new Contact();
-        $contact->fill($dataContact);
-        $contact->save();
-      }
+      // if (is_array($dataContact)) {
+      //   $contact = new Contact();
+      //   $contact->fill($dataContact);
+      //   $contact->save();
+      // }
     } catch (\Illuminate\Database\QueryException $ex) { }
   }
   // print  statistics in the response
   echo json_encode(Contact::Stats());
 }
+
 
 if (isset($_GET['action']) && $_GET['action'] === 'stats') {
   // print  statistics in the response
