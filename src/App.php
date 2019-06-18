@@ -15,22 +15,15 @@ if (isset($_FILES['log'])) {
   // Parse the contacts
   $contacts = Contact::parseCSV($csvFile);
 
-  // split contacts into blocks of 1000 records to not charge to much memory
+  // split contacts into blocks of 10000 records to not charge to much memory
   $contactBlocks = array_chunk($contacts, ceil(count($contacts) / 10000));
 
   foreach ($contactBlocks as $contactBlock) {
 
     try {
-      // tried bulk insertt but didint work, need more time to check taht
+      // Bulk insert in blocks of 10000 records
       if (count($contactBlock) > 0)
         Contact::insert($contactBlock);
-
-      //so let insert one at time
-      // if (is_array($dataContact)) {
-      //   $contact = new Contact();
-      //   $contact->fill($dataContact);
-      //   $contact->save();
-      // }
     } catch (\Illuminate\Database\QueryException $ex) { }
   }
   // print  statistics in the response
