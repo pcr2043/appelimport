@@ -31,9 +31,22 @@ if (isset($_FILES['log'])) {
 }
 
 
-if (isset($_GET['action']) && $_GET['action'] === 'stats') {
-  // print  statistics in the response
-  echo json_encode(Contact::Stats());
+if (isset($_GET['action'])) {
+
+  switch ($_GET['action']) {
+    case 'stats':
+      // print  statistics in the response
+      echo json_encode(Contact::Stats());
+
+      break;
+
+    case 'clear':
+      // print  statistics in the response
+      Contact::truncate();
+      echo json_encode(['result' => true]);
+
+      break;
+  }
 
   die();
 }

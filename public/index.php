@@ -20,7 +20,11 @@ require('../src/App.php');
   <div class="container">
     <div class="columns">
       <div class="column is-full">
-        <h1 class="is-size-3">APPEL IMPORT <button onclick="stats()" class="button is-primary  is-pulled-right is-small">RELOAD STATS</button></h1>
+        <h1 class="is-size-3">APPEL IMPORT
+          <button onclick="stats()" class="button is-primary  is-pulled-right is-small">RELOAD STATS</button>
+          <button onclick="clearDB()" id="btn-clear" class="button is-danger  is-pulled-right is-small mr-3">CLEAR DATABASE</button>
+
+        </h1>
       </div>
     </div>
 
@@ -71,9 +75,29 @@ require('../src/App.php');
   .container {
     margin-top: 2rem;
   }
+
+  .mr-3 {
+    margin-right: 1rem;
+  }
 </style>
 
 <script>
+  function clearDB() {
+
+    var button = $('#btn-clear')
+    //set text
+    button.text('CLEARING, WAIT...');
+
+    $.get('/', {
+      'action': 'clear'
+    }).done(function(data) {
+      // update text
+      button.text('CLEAR DATABASE');
+      // reset stats
+      stats();
+    })
+  }
+
   function stats() {
     $.get('/', {
       'action': 'stats'
