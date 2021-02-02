@@ -6,7 +6,7 @@
         "email": "pcr2043@gmail.com"
     }],
     "require": {
-        "illuminate/database": "^5.8"
+        "illuminate/database": "^6.20"
     },
     "autoload": {
         "classmap": [
